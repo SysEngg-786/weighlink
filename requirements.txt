@@ -1,0 +1,7 @@
+# ==============================================================================
+# requirements.txt — weighlink v1
+# Only dependencies needed for the current build. No speculative packages.
+# ==============================================================================
+
+pyserial>=3.5          # RS232/RS485 serial communication
+requests>=2.28         # Webhook HTTP POST to n8n / workflow engine
