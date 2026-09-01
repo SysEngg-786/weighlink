@@ -1,0 +1,28 @@
+{
+    "_comment": "weighlink/config/tolerances/demo_product.json — Demo tolerance profile",
+    "_version": "1.0",
+
+    "profile_name": "demo_product",
+    "product_name": "Demo Batch Material",
+    "unit": "g",
+
+    "tolerance": {
+        "min_weight": 9.5,
+        "max_weight": 10.5,
+        "nominal_weight": 10.0,
+        "_description": "Stable readings outside min/max are flagged FAIL. Within range = PASS. No tolerance loaded = NO_RULE."
+    },
+
+    "overload_threshold": 30.0,
+
+    "_seam_notes": {
+        "future_fields": [
+            "product_code (for ERP lookup)",
+            "batch_size (expected count per batch)",
+            "tare_weight (container weight to subtract)",
+            "tolerance_class (e.g. OIML R76, NIST HB44)",
+            "recalibration_interval_hours"
+        ],
+        "_description": "These fields are not used in v1. They are listed here to document where tomorrow's extensions attach."
+    }
+}

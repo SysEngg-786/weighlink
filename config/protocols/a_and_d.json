@@ -1,0 +1,75 @@
+{
+    "_comment": "weighlink/config/protocols/a_and_d.json — A&D Standard ASCII Protocol",
+    "_reference": "A&D GX-A/GF-A Communication Manual, FX-i/FZ-i Interface Specification",
+    "_validated_against": "A&D RsWeight 6.04 (interop confirmed 2026-09-01)",
+    "_version": "1.0",
+
+    "protocol_name": "A&D Standard ASCII",
+    "manufacturer": "A&D Company, Ltd.",
+
+    "serial_settings": {
+        "baudrate": 9600,
+        "bytesize": 7,
+        "parity": "even",
+        "stopbits": 1,
+        "timeout_seconds": 0.5,
+        "encoding": "ascii"
+    },
+
+    "packet_format": {
+        "_description": "17-character fixed format: HH,SWWW.WWW UUU CR LF",
+        "_example": "ST,+001.234   g\\r\\n",
+        "terminator": "\\r\\n",
+        "min_length": 16,
+        "fields": {
+            "header": {
+                "start": 0,
+                "end": 2,
+                "_description": "Stability indicator: ST=stable, US=unstable, OL=overload"
+            },
+            "separator": {
+                "position": 2,
+                "expected": ","
+            },
+            "sign": {
+                "position": 3,
+                "_description": "+ or -"
+            },
+            "weight": {
+                "start": 3,
+                "end": 11,
+                "_description": "Signed float including sign character, e.g. +001.234"
+            },
+            "unit": {
+                "start": 11,
+                "end": null,
+                "strip": true,
+                "_description": "Right-aligned, 3 chars padded, e.g. '  g', ' kg', ' lb'"
+            }
+        }
+    },
+
+    "header_values": {
+        "stable": "ST",
+        "unstable": "US",
+        "overload": "OL"
+    },
+
+    "commands": {
+        "query_immediate": "Q",
+        "query_on_stability": "S",
+        "continuous_stream": "R",
+        "tare": "T",
+        "zero": "Z",
+        "cancel_stream": "\\x1B",
+        "_note": "Commands terminated with CR LF. ACK (0x06) returned if SiF/ErCd enabled."
+    },
+
+    "output_modes": {
+        "_description": "A&D scales support multiple transmission modes, configurable on the device",
+        "continuous": "Stream output on R command until ESC received",
+        "stability_triggered": "Send on S command when weight stabilizes",
+        "polled": "Send on Q command immediately regardless of stability",
+        "key_press": "Send on PRINT button press (device-side)"
+    }
+}
