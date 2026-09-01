@@ -20,7 +20,7 @@
         "_description": "17-character fixed format: HH,SWWW.WWW UUU CR LF",
         "_example": "ST,+001.234   g\\r\\n",
         "terminator": "\\r\\n",
-        "min_length": 16,
+        "min_length": 14,
         "fields": {
             "header": {
                 "start": 0,
