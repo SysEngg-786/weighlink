@@ -1,32 +1,28 @@
 {
-    "_comment": "weighlink/config/app_config.json — Application configuration",
+    "_comment": "weighlink/config/app_config.example.json — TEMPLATE. Copy to app_config.json and fill in real values. The real app_config.json is gitignored (contains the live auth token and webhook URL).",
     "_version": "1.0",
-
     "serial": {
         "simulator_port": "COM20",
         "listener_port": "COM21",
         "protocol": "a_and_d"
     },
-
     "device": {
         "device_id": "scale_01",
         "device_name": "A&D Industrial Scale (Simulator)"
     },
-
     "compliance": {
         "audit_log_dir": "data/audit_log",
         "tolerance_profile": "demo_product",
         "default_operator_id": "OP_UNSET",
         "default_lot_ref": "LOT_UNSET"
     },
-
     "integration": {
-        "webhook_url": "http://YOUR_VPS_IP:5678/webhook/weighlink",
+        "webhook_url": "https://YOUR_N8N_HOST/webhook/weighlink-weighment",
         "webhook_enabled": true,
+        "webhook_auth_token": "YOUR_AUTH_TOKEN_HERE",
         "retry_attempts": 3,
         "retry_backoff_base_seconds": 2
     },
-
     "gui": {
         "default_target_weight": 10.0,
         "target_weight_min": 1.0,

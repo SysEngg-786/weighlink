@@ -44,6 +44,10 @@ class WebhookPusher:
         self._enabled = integration.get("webhook_enabled", False)
         self._retry_attempts = integration.get("retry_attempts", 3)
         self._backoff_base = integration.get("retry_backoff_base_seconds", 2)
+        # Shared secret sent as the X-Weighlink-Token header; must match the
+        # Header Auth credential configured on the n8n webhook node. Empty
+        # string if unset (webhook then rejects the request — fail loud).
+        self._auth_token = integration.get("webhook_auth_token", "")
 
         # Counters for external monitoring
         self._push_count = 0
@@ -94,7 +98,11 @@ class WebhookPusher:
                 response = requests.post(
                     self._url,
                     json=payload,
-                    headers={"Content-Type": "application/json"},
+                    headers={
+                        "Content-Type": "application/json",
+                        # Auth gate: n8n's Header Auth credential checks this.
+                        "X-Weighlink-Token": self._auth_token
+                    },
                     timeout=10
                 )
 

@@ -34,3 +34,9 @@ Thumbs.db
 # ---- Environment / Secrets ----
 .env
 *.local
+
+# ---- App config (contains live auth token + webhook URLs — never commit) ----
+config/app_config.json
+
+# ---- Dev docs (infra facts: encryption key, DB passwords, hooks — never commit) ----
+docs/dev/
